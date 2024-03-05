@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                 override fun run() {
                     val attributesData = AttributesData("value${(1..10).random()}", attributes2, (1..100).random().toDouble())
                     val attributesData2 = AttributesData("value${(1..10).random()}", attributes12, (1..100).random().toDouble())
-                    postAttributes(apiService, accessToken, attributesData)
+//                    postAttributes(apiService, accessToken, attributesData)
                     postAttributes2(apiService, accessToken2, attributesData2)
                     getAttributes(apiService, accessToken, clientKeys)
                     getAttributes2(apiService, accessToken2, clientKeys)
@@ -43,34 +43,34 @@ class MainActivity : AppCompatActivity() {
                     attributes12 = !attributes12
                 }
             }, 0)
-            postAttributes(apiService, accessToken, AttributesData("value1", true, 1.0))
+//            postAttributes(apiService, accessToken, AttributesData("value1", true, 1.0))
             postAttributes2(apiService, accessToken2, AttributesData("value2", false, 2.0))
             getAttributes(apiService, accessToken, clientKeys)
             getAttributes2(apiService, accessToken2, clientKeys)
         }
     }
 
-    private fun postAttributes(apiService: ApiService, accessToken: String, attributesData: AttributesData) {
-        val call = apiService.postAttributes(
-            "${ApiService.BASE_URL}$accessToken/attributes",
-            "application/json",
-            attributesData
-        )
-        call.enqueue(object : Callback<Void> {
-            override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                if (response.isSuccessful) {
-                    Log.d("Request successful","${response.body()}")
-                } else {
-                    Log.d("Request failed","${response.errorBody()?.string()}")
-                    Toast.makeText(this@MainActivity, "Request failed: ${response.errorBody()?.string()}", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: Call<Void>, t: Throwable) {
-                Toast.makeText(this@MainActivity, "Request failed: ${t.message}", Toast.LENGTH_SHORT).show()
-            }
-        })
-    }
+//    private fun postAttributes(apiService: ApiService, accessToken: String, attributesData: AttributesData) {
+//        val call = apiService.postAttributes(
+//            "${ApiService.BASE_URL}$accessToken/attributes",
+//            "application/json",
+//            attributesData
+//        )
+//        call.enqueue(object : Callback<Void> {
+//            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+//                if (response.isSuccessful) {
+//                    Log.d("Request successful","${response.body()}")
+//                } else {
+//                    Log.d("Request failed","${response.errorBody()?.string()}")
+//                    Toast.makeText(this@MainActivity, "Request failed: ${response.errorBody()?.string()}", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<Void>, t: Throwable) {
+//                Toast.makeText(this@MainActivity, "Request failed: ${t.message}", Toast.LENGTH_SHORT).show()
+//            }
+//        })
+//    }
 
     private fun postAttributes2(apiService: ApiService, accessToken: String, attributesData: AttributesData) {
         val call = apiService.postAttributes(
@@ -104,9 +104,9 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<ClientAttributesResponse>, response: Response<ClientAttributesResponse>) {
                 if (response.isSuccessful) {
                     val clientAttributes = response.body()
-                    binding.attribute1.text = clientAttributes?.client?.attribute1.toString()
-                    binding.attribute2.text = clientAttributes?.client?.attribute2.toString()
-                    binding.attribute3.text = clientAttributes?.client?.attribute3.toString()
+                    binding.attribute21.text = clientAttributes?.client?.attribute1.toString()
+                    binding.attribute22.text = clientAttributes?.client?.attribute2.toString()
+                    binding.attribute23.text = clientAttributes?.client?.attribute3.toString()
                 } else {
                     Log.d("Request failed","${response.errorBody()?.string()}")
                     Toast.makeText(this@MainActivity, "Request failed: ${response.errorBody()?.string()}", Toast.LENGTH_SHORT).show()
